@@ -176,6 +176,7 @@ public class AmazonS3 {
 	/** ACL to apply to created objects. */
 	private final String acl;
 
+	/** Domain of API calls. see http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region */
 	private final String endpoint;
 
 	/** Maximum number of times to try an operation. */
