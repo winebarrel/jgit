@@ -176,7 +176,7 @@ public class AmazonS3 {
 	/** ACL to apply to created objects. */
 	private final String acl;
 
-	private final String domain;
+	private final String endpoint;
 
 	/** Maximum number of times to try an operation. */
 	private final int maxAttempts;
@@ -234,11 +234,11 @@ public class AmazonS3 {
 		else
 			throw new IllegalArgumentException("Invalid acl: " + pacl); //$NON-NLS-1$
 
-		final String pdomain = props.getProperty("domain");
-		if (pdomain == null)
-			domain = DOMAIN;
+		final String pendpoint = props.getProperty("endpoint");
+		if (pendpoint == null)
+			endpoint = DOMAIN;
 		else
-			domain = pdomain;
+			endpoint = pendpoint;
 
 		try {
 			final String cPas = props.getProperty("password"); //$NON-NLS-1$
@@ -560,7 +560,7 @@ public class AmazonS3 {
 		urlstr.append("http://"); //$NON-NLS-1$
 		urlstr.append(bucket);
 		urlstr.append('.');
-		urlstr.append(domain);
+		urlstr.append(endpoint);
 		urlstr.append('/');
 		if (key.length() > 0)
 			HttpSupport.encode(urlstr, key);
@@ -621,7 +621,7 @@ public class AmazonS3 {
 
 		final String host = c.getURL().getHost();
 		s.append('/');
-		s.append(host.substring(0, host.length() - domain.length() - 1));
+		s.append(host.substring(0, host.length() - endpoint.length() - 1));
 		s.append(c.getURL().getPath());
 
 		final String sec;
